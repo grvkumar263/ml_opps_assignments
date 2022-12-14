@@ -8,9 +8,9 @@ from sklearn.model_selection import train_test_split
 
 
 GAMMA = 0.001
-train_frac = 0.8
-test_frac = 0.1
-dev_frac = 0.1
+train_frac = 0.7
+test_frac = 0.15
+dev_frac = 0.15
 
 
 # PART: -load dataset --data from files, csv, tsv, json, pickle
