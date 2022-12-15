@@ -84,6 +84,14 @@ for curr_param in hyp_para_combo:
     clf.fit(X_train, y_train)
 
 
+    #Accuracy for the training set.
+    curr_predicted_train = clf.predict(X_train)
+    curr_accuracy_train = accuracy_score(y_train, curr_predicted_train)    
+
+    #Accuracy for the dev set.
+    curr_predicted_dev = clf.predict(X_dev)
+    curr_accuracy_dev = accuracy_score(y_dev, curr_predicted_dev)
+
     # PART: get test set pridection
     # Predict the value of the digit on the test subset
     curr_predicted = clf.predict(X_test)
@@ -92,14 +100,20 @@ for curr_param in hyp_para_combo:
     # 2b. compute accuracy on validation set
     curr_accuracy = accuracy_score(y_test, curr_predicted)
 
+    #Printing the results for each set of hyperparameters.
+    print(f"{hyper_param} \tTest_Accuracy: {curr_accuracy} \tTrain_Accuracy: {curr_accuracy_train} \tDev_Accuracy: {curr_accuracy_dev}")
+
+
     # 3. identify best set of hyper parameter for which validation set acuuracy is highest
     if accuracy < curr_accuracy:
         best_hyp_param = hyper_param
         accuracy = curr_accuracy
+        accuracy_train = curr_accuracy_train
+        accuracy_dev = curr_accuracy_dev
         best_model = clf
-        print(f"{best_hyp_param} \tAccuracy: {accuracy}")
-    
-
+        
+print("\n")    
+print(f"\tBest: {best_hyp_param} \tTest_Accuracy: {accuracy} \tTrain_Accuracy: {accuracy_train} \tDev_Accuracy: {accuracy_dev}")
 
 # if predicted < curr_predicted:
 #     predicted = curr_predicted
@@ -114,7 +128,9 @@ for ax, image, prediction in zip(axes, X_test, curr_predicted):
     ax.set_title(f"Prediction: {prediction}")
 # PART: Compute evaluation Matrics 
 # 4. report the best set accuracy with that best model.
+"""
 print(
     f"Classification report for classifier {clf}:\n"
     f"{metrics.classification_report(y_test, predicted)}\n"
 ) 
+"""
